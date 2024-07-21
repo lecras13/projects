@@ -1,0 +1,10 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-service
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE

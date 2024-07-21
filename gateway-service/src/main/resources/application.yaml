@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+cloud:
+  eureka-host: localhost
+  processing-service-url: http://localhost:8090
+  currency-service-url: http://localhost:8085
+
+spring:
+  application:
+    name: api-gateway-service
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: currency-service
+          uri: ${cloud.currency-service-url}
+          predicates:
+            - Path=/currency/**
+        - id: exchange-processing-service
+          uri: ${cloud.processing-service-url}
+          predicates:
+            - Path=/processing/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
