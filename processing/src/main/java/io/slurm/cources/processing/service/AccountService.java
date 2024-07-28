@@ -18,6 +18,7 @@ import java.util.Optional;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    public final ResolveUserService resolveUserService;
 
     @Transactional
     public AccountEntity createNewAccount(NewAccountDto newAccountDto) {
@@ -44,7 +45,7 @@ public class AccountService {
         return accountRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Account with Id " + id + " was not found"));
     }
 
-    public List<AccountEntity> getAllAccounts(Long userId){
-        return accountRepository.findByUserId(userId);
+    public List<AccountEntity> getAllAccounts(){
+        return accountRepository.findByUserId(resolveUserService.resolveId());
     }
 }

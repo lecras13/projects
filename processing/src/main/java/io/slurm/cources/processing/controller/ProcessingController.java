@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/processing")
 @RequiredArgsConstructor
-public class AccountController {
+public class ProcessingController {
 
     private final AccountService accountService;
 
@@ -37,9 +37,9 @@ public class AccountController {
                 exchangeMoneyDto.getToAccountId(), exchangeMoneyDto.getMoney());
     }
 
-    @GetMapping("/account/{userId}")
-    public List<AccountEntity> getAllAccounts(@PathVariable Long userId){
-        return accountService.getAllAccounts(userId);
+    @GetMapping("/account")
+    public List<AccountEntity> getAllAccounts(){
+        return accountService.getAllAccounts();
     }
 
 }

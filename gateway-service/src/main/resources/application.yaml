@@ -5,6 +5,7 @@ cloud:
   eureka-host: localhost
   processing-service-url: http://${cloud.eureka-host}:8090
   currency-service-url: http://${cloud.eureka-host}:8085
+  auth-service: http://${cloud.eureka-host}:9000
 
 spring:
   application:
@@ -25,6 +26,10 @@ spring:
           uri: ${cloud.processing-service-url}
           predicates:
             - Path=/processing/**
+        - id: auth-service
+          uri: ${cloud.auth-service}
+          predicates:
+            - Path=/oauth2/**, /user/**
 
 eureka:
   client:
